@@ -20,6 +20,7 @@
  ******************************************************************************************/
 #include "MainWindow.h"
 #include "Game.h"
+#include "Star.h"
 
 Game::Game( MainWindow& wnd )
 	:
@@ -42,8 +43,5 @@ void Game::UpdateModel()
 
 void Game::ComposeFrame()
 {
-	if ( wnd.mouse.LeftIsPressed() )
-	{
-		gfx.DrawLine( { 150.0f, 150.0f }, (Vec2)wnd.mouse.GetPos(), Colors::Green);
-	}
+	gfx.DrawClosedPolyline( Star::Make( 150.0f, 75.0f ), Colors::Red );
 }
