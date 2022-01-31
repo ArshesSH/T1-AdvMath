@@ -23,6 +23,10 @@
 #include "Keyboard.h"
 #include "Mouse.h"
 #include "Graphics.h"
+#include "CoordinateTransformer.h"
+#include "Entity.h"
+#include "Camera.h"
+#include <vector>
 
 class Game
 {
@@ -43,4 +47,7 @@ private:
 	/********************************/
 	/*  User Variables              */
 	/********************************/
+	CoordinateTransformer ct;
+	Camera cam;
+	std::vector<Entity> entities;
 };
