@@ -378,6 +378,27 @@ void Graphics::DrawClosedPolyline( const std::vector<Vec2>& vertices, Color c )
 	DrawLine( vertices.back(), vertices.front(), c);
 }
 
+void Graphics::DrawClosedPolyline( const std::vector<Vec2>& vertices, const Vec2& translation, float scale_x, float scale_y, Color c )
+{
+	const auto transform = [&]( Vec2 v )
+	{
+		v.x *= scale_x;
+		v.y *= scale_y;
+		v += translation;
+		return v;
+	};
+
+	const Vec2 front = transform( vertices.front() );
+	Vec2 cur = front;
+	for ( auto i = vertices.begin(); i != std::prev( vertices.end() ); i++ )
+	{
+		const Vec2 next = transform( *std::next( i ) );
+		DrawLine( cur, next, c );
+		cur = next;
+	}
+	DrawLine( cur, front, c );
+}
+
 
 //////////////////////////////////////////////////
 //           Graphics Exception
