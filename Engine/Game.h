@@ -26,6 +26,7 @@
 #include "CoordinateTransformer.h"
 #include "Camera.h"
 #include "StarField.h"
+#include "MouseCameraControl.h"
 #include <vector>
 
 class Game
@@ -50,4 +51,5 @@ private:
 	CoordinateTransformer ct;
 	Camera cam;
 	StarField field;
+	MouseCameraControl camControl;
 };

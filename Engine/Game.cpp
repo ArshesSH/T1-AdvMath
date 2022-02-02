@@ -27,7 +27,8 @@ Game::Game( MainWindow& wnd )
 	wnd( wnd ),
 	gfx( wnd ),
 	ct(gfx),
-	cam(ct)
+	cam(ct),
+	camControl(cam, wnd.mouse)
 {
 	field.MakeRandomField();
 }
@@ -59,18 +60,22 @@ void Game::UpdateModel()
 	{
 		cam.MoveBy( { -speed, 0.0f } );
 	}
-	while ( !wnd.mouse.IsEmpty() )
-	{
-		const auto e = wnd.mouse.Read();
-		if ( e.GetType() == Mouse::Event::Type::WheelUp )
-		{
-			cam.SetScale( cam.GetScale() * 1.05f);
-		}
-		else if ( e.GetType() == Mouse::Event::Type::WheelDown )
-		{
-			cam.SetScale( cam.GetScale() * 0.95f );
-		}
-	}
+
+	camControl.Update();
+
+	//while ( !wnd.mouse.IsEmpty() )
+	//{
+	//	const auto e = wnd.mouse.Read();
+	//	if ( e.GetType() == Mouse::Event::Type::WheelUp )
+	//	{
+	//		cam.SetScale( cam.GetScale() * 1.05f);
+	//	}
+	//	else if ( e.GetType() == Mouse::Event::Type::WheelDown )
+	//	{
+	//		cam.SetScale( cam.GetScale() * 0.95f );
+	//	}
+	//}
+
 }
 
 void Game::ComposeFrame()
