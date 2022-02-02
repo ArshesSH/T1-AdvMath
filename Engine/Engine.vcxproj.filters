@@ -75,6 +75,12 @@
     <ClInclude Include="Drawble.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="StarField.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="StarEntity.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DXErr.cpp">

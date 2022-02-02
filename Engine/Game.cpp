@@ -20,7 +20,7 @@
  ******************************************************************************************/
 #include "MainWindow.h"
 #include "Game.h"
-#include "Star.h"
+#include <random>
 
 Game::Game( MainWindow& wnd )
 	:
@@ -29,13 +29,7 @@ Game::Game( MainWindow& wnd )
 	ct(gfx),
 	cam(ct)
 {
-	entities.emplace_back( Star::Make( 100.0f, 50.0f ), Vec2{ 460.0f, 0.0f } );
-	entities.emplace_back( Star::Make( 150.0f, 50.0f ), Vec2{ 150.0f, 300.0f } );
-	entities.emplace_back( Star::Make( 100.0f, 50.0f ), Vec2{ 250.0f, -200.0f } );
-	entities.emplace_back( Star::Make( 150.0f, 50.0f ), Vec2{ -250.0f, 200.0f } );
-	entities.emplace_back( Star::Make( 100.0f, 50.0f ), Vec2{ 0.0f, 0.0f } );
-	entities.emplace_back( Star::Make( 200.0f, 50.0f ), Vec2{ -150.0f, 300.0f } );
-	entities.emplace_back( Star::Make( 100.0f, 50.0f ), Vec2{ 400.0f, 300.0f } );
+	field.MakeRandomField();
 }
 
 void Game::Go()
@@ -81,8 +75,8 @@ void Game::UpdateModel()
 
 void Game::ComposeFrame()
 {
-	for ( const auto& e : entities )
+	for ( const auto& e : field.GetField() )
 	{
-		cam.Draw( e.GetDrawble() );
+		cam.Draw( e->GetDrawble() );
 	}
 }
