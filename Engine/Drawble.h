@@ -8,9 +8,9 @@
 class Drawble
 {
 public:
-	Drawble( std::vector<Vec2> model, Color c )
+	Drawble( const std::vector<Vec2>& model, Color c )
 		:
-		model(model),
+		model(&model),
 		c(c)
 	{}
 
@@ -33,16 +33,10 @@ public:
 	}
 	void Render( Graphics& gfx )
 	{
-		for ( auto& v : model )
-		{
-			v.x *= scale_x;
-			v.y *= scale_y;
-			v += translation;
-		}
-		gfx.DrawClosedPolyline( std::move( model ), c );
+		gfx.DrawClosedPolyline( *model, translation, scale_x, scale_y, c );
 	}
 private:
-	std::vector<Vec2> model;
+	const std::vector<Vec2>* model;
 	Color c;
 	Vec2 translation = {0.0f, 0.0f};
 	float scale_x = 1.0f;
