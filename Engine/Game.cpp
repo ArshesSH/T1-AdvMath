@@ -30,6 +30,16 @@ Game::Game( MainWindow& wnd )
 	cam(ct)
 {
 	field.MakeRandomField();
+
+	//{
+	//	entities.emplace_back( Star::Make( 100.0f, 50.0f ), Vec2{ 460.0f,0.0f } );
+	//	entities.emplace_back( Star::Make( 150.0f, 50.0f ), Vec2{ 150.0f,300.0f } );
+	//	entities.emplace_back( Star::Make( 100.0f, 50.0f ), Vec2{ 250.0f,-200.0f } );
+	//	entities.emplace_back( Star::Make( 150.0f, 50.0f ), Vec2{ -250.0f,200.0f } );
+	//	entities.emplace_back( Star::Make( 100.0f, 50.0f ), Vec2{ 0.0f,0.0f } );
+	//	entities.emplace_back( Star::Make( 200.0f, 50.0f ), Vec2{ -150.0f,-300.0f } );
+	//	entities.emplace_back( Star::Make( 100.0f, 50.0f ), Vec2{ 400.0f,300.0f } );
+	//}
 }
 
 void Game::Go()
@@ -79,4 +89,9 @@ void Game::ComposeFrame()
 	{
 		cam.Draw( e->GetDrawble() );
 	}
+
+	//for ( const auto& e : entities )
+	//{
+	//	cam.Draw( e.GetDrawble() );
+	//}
 }

@@ -50,4 +50,5 @@ private:
 	CoordinateTransformer ct;
 	Camera cam;
 	StarField field;
+	std::vector<Entity> entities;
 };

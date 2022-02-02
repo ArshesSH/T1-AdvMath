@@ -28,7 +28,7 @@ public:
 
 			// If new star collide with any of starfield's star 
 			if ( std::any_of( field.begin(), field.end(),
-				[&]( const std::unique_ptr<StarEntity>& e ) {return (e->GetRadius() + rad) <= (e->GetPos() - pos).Len(); } )
+				[&]( const std::unique_ptr<StarEntity>& e ) {return (e->GetRadius() + rad) >= (e->GetPos() - pos).Len(); } )
 				)
 			{
 				continue;
