@@ -2,6 +2,8 @@
 
 #include "CoordinateTransformer.h"
 #include "Drawble.h"
+#include "Graphics.h"
+#include "Rect.h"
 
 class Camera
 {
@@ -42,6 +44,12 @@ public:
 		drawble.Translate( -pos );
 		drawble.Scale( scale );
 		ct.Draw( std::move(drawble) );
+	}
+	const RectF& GetScreenRect()
+	{
+		const float halfWidth = float( Graphics::ScreenWidth / 2 );
+		const float halfHeight = float( Graphics::ScreenHeight / 2 );
+		return RectF( (pos.x - halfWidth) * scale, (pos.x + halfWidth) * scale, (pos.y + halfHeight) * scale, (pos.y - halfHeight) * scale );
 	}
 
 private:

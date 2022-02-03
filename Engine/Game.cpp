@@ -20,6 +20,7 @@
  ******************************************************************************************/
 #include "MainWindow.h"
 #include "Game.h"
+#include "Rect.h"
 #include <random>
 
 Game::Game( MainWindow& wnd )
@@ -50,6 +51,11 @@ void Game::ComposeFrame()
 {
 	for ( const auto& e : field.GetField() )
 	{
-		cam.Draw( e->GetDrawble() );
+		// if Rect.Screen overlap with Rect.Star, then draw
+		// will need get screen Rect and star Rect, IsOverlap
+		if ( !(cam.GetScreenRect().IsOverlappingWith( e->GetStarRect() )) )
+		{
+			cam.Draw( e->GetDrawble() );
+		}
 	}
 }

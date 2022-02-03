@@ -24,7 +24,7 @@ public:
 
 	_Rect( const _Vec2<T>& topLeft, T width, T height )
 		:
-		_Rect( topLeft, topLeft + Vei2( width, height ) )
+		_Rect( topLeft, topLeft + _Vec2<T>( width, height ) )
 	{
 	}
 
