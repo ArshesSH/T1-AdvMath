@@ -20,8 +20,7 @@
  ******************************************************************************************/
 #include "MainWindow.h"
 #include "Game.h"
-#include "Rect.h"
-#include <random>
+#include "RectF.h"
 
 Game::Game( MainWindow& wnd )
 	:
@@ -44,7 +43,9 @@ void Game::Go()
 
 void Game::UpdateModel()
 {
+	const float dt = ft.Mark();
 	camControl.Update();
+	field.Update( dt );
 }
 
 void Game::ComposeFrame()
@@ -53,7 +54,7 @@ void Game::ComposeFrame()
 	{
 		// if Rect.Screen overlap with Rect.Star, then draw
 		// will need get screen Rect and star Rect, IsOverlap
-		if ( !(cam.GetScreenRect().IsOverlappingWith( e->GetStarRect() )) )
+		if ( e->GetStarRect().IsOverlapping(cam.GetScreenRect()) )
 		{
 			cam.Draw( e->GetDrawble() );
 		}

@@ -27,6 +27,7 @@
 #include "Camera.h"
 #include "StarField.h"
 #include "MouseCameraControl.h"
+#include "FrameTimer.h"
 #include <vector>
 
 class Game
@@ -52,4 +53,5 @@ private:
 	Camera cam;
 	StarField field;
 	MouseCameraControl camControl;
+	FrameTimer ft;
 };

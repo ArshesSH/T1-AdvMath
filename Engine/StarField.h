@@ -20,6 +20,9 @@ public:
 		std::normal_distribution<float> flareDist( flareMean, flareDev );
 		const Color colors[] = { Colors::Blue, Colors::White, Colors::Cyan, Colors::Red, Colors::Yellow };
 		std::uniform_int_distribution<size_t> colorSampler( 0, std::end( colors ) - std::begin( colors ) );
+		std::normal_distribution<float> colorFreqDist( colorFreqMean, colorFreqDev );
+		std::uniform_real_distribution<float> pulsePhaseDist( 0.0f, 2.0f * 3.141592f );
+		std::normal_distribution<float> radiusFreqDist( radiusFreqMean, radiusFreqDev );
 
 		while ( field.size() < nStars )
 		{
@@ -37,14 +40,25 @@ public:
 			const float ratio = std::clamp( ratioDist( rng ), innerRatioMin, innerRatioMax );
 			const int nFlares = std::clamp( (int)flareDist( rng ), flareMin, flareMax );
 			const Color c = colors[colorSampler( rng )];
+			const float colorFreq = std::clamp( colorFreqDist( rng ), colorFreqMin, colorFreqMax );
+			const float colorPhase = pulsePhaseDist( rng );
+			const float radiusFreq = radiusFreqDist( rng );
 
-			field.emplace_back( std::make_unique<StarEntity>( rad, ratio, nFlares, pos, c ) );
+			field.emplace_back( std::make_unique<StarEntity>( rad, ratio, nFlares, pos, c, colorFreq, colorPhase, radiusFreq ) );
 		}
 	}
 
 	const std::vector<std::unique_ptr<StarEntity>>& GetField() const
 	{
 		return field;
+	}
+
+	void Update(float dt)
+	{
+		for ( auto& star : field )
+		{
+			star->Update( dt );
+		}
 	}
 
 private:
@@ -63,6 +77,14 @@ private:
 	static constexpr int flareMin = 3;
 	static constexpr float flareMean = 6.5f;
 	static constexpr float flareDev = 2.0f;
+	static constexpr float colorFreqMean = 1.8f;
+	static constexpr float colorFreqDev = 1.0f;
+	static constexpr float colorFreqMin = 0.6f;
+	static constexpr float colorFreqMax = 4.0f;
+	static constexpr float radiusFreqMean = 0.5f;
+	static constexpr float radiusFreqDev = 0.3f;
+	static constexpr float radiusFreqMin = 0.1f;
+	static constexpr float radiusFreqMax = 0.9f;
 
 	std::vector<std::unique_ptr<StarEntity>> field;
 };

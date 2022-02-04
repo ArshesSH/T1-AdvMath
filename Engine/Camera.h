@@ -3,7 +3,7 @@
 #include "CoordinateTransformer.h"
 #include "Drawble.h"
 #include "Graphics.h"
-#include "Rect.h"
+#include "RectF.h"
 
 class Camera
 {
@@ -49,7 +49,7 @@ public:
 	{
 		const float halfWidth = float( Graphics::ScreenWidth / 2 );
 		const float halfHeight = float( Graphics::ScreenHeight / 2 );
-		return RectF( (pos.x - halfWidth) * scale, (pos.x + halfWidth) * scale, (pos.y + halfHeight) * scale, (pos.y - halfHeight) * scale );
+		return RectF::FromCenter( pos, halfWidth / scale, halfHeight / scale );
 	}
 
 private:

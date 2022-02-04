@@ -30,6 +30,10 @@ public:
 	{
 		scale = scale_in;
 	}
+	void SetColor( Color c_in )
+	{
+		c = c_in;
+	}
 	void TranslateBy( const Vec2& offset )
 	{
 		pos += offset;
@@ -41,7 +45,6 @@ public:
 		d.Translate( pos );
 		return d;
 	}
-
 private:
 	std::vector<Vec2> model;
 	Vec2 pos = {0.0f, 0.0f};
