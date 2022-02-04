@@ -93,6 +93,9 @@
     <ClInclude Include="PlankEntity.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="BallEntity.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DXErr.cpp">
