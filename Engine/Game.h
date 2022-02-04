@@ -25,9 +25,9 @@
 #include "Graphics.h"
 #include "CoordinateTransformer.h"
 #include "Camera.h"
-#include "StarField.h"
 #include "MouseCameraControl.h"
 #include "FrameTimer.h"
+#include "PlankEntity.h"
 #include <vector>
 
 class Game
@@ -53,4 +53,5 @@ private:
 	Camera cam;
 	MouseCameraControl camControl;
 	FrameTimer ft;
+	PlankEntity plank;
 };

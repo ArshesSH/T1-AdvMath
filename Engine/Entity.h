@@ -45,6 +45,11 @@ public:
 		d.Translate( pos );
 		return d;
 	}
+protected:
+	void SetModel( std::vector<Vec2> model_in )
+	{
+		model = std::move( model_in );
+	}
 private:
 	std::vector<Vec2> model;
 	Vec2 pos = {0.0f, 0.0f};

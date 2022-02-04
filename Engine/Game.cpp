@@ -28,7 +28,8 @@ Game::Game( MainWindow& wnd )
 	gfx( wnd ),
 	ct(gfx),
 	cam(ct),
-	camControl(cam, wnd.mouse)
+	camControl(cam, wnd.mouse),
+	plank( { 0,0 }, -380.0f, -300.0f, 300.0f, 20.0f, Colors::Yellow )
 {
 }
 
@@ -42,8 +43,19 @@ void Game::Go()
 
 void Game::UpdateModel()
 {
+	if ( wnd.kbd.KeyIsPressed( VK_UP ) )
+	{
+		plank.MoveFreeYBy( 3 );
+	}
+	else if ( wnd.kbd.KeyIsPressed( VK_DOWN ) )
+	{
+		plank.MoveFreeYBy( -3 );
+	}
+
+	camControl.Update();
 }
 
 void Game::ComposeFrame()
 {
+	cam.Draw( plank.GetDrawble() );
 }
