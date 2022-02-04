@@ -29,7 +29,8 @@ Game::Game( MainWindow& wnd )
 	ct(gfx),
 	cam(ct),
 	camControl(cam, wnd.mouse),
-	plank( { 0,0 }, -380.0f, -300.0f, 300.0f, 20.0f, Colors::Yellow )
+	plank( { 0,0 }, -380.0f, -300.0f, 300.0f, 20.0f, Colors::Yellow ),
+	ball( 10, { -300, -300 }, { 0, 1 }, Colors::Magenta )
 {
 }
 
@@ -43,6 +44,7 @@ void Game::Go()
 
 void Game::UpdateModel()
 {
+	const float dt = ft.Mark();
 	if ( wnd.kbd.KeyIsPressed( VK_UP ) )
 	{
 		plank.MoveFreeYBy( 3 );
@@ -53,9 +55,11 @@ void Game::UpdateModel()
 	}
 
 	camControl.Update();
+	ball.Update();
 }
 
 void Game::ComposeFrame()
 {
 	cam.Draw( plank.GetDrawble() );
+	cam.Draw( ball.GetDrawble() );
 }

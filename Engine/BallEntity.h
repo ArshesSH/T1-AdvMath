@@ -25,20 +25,18 @@ public:
 	{
 		vel = vel_in;
 	}
-	void Update( float dt )
+	void Update(  )
 	{
-		time += dt;
 		Transit();
 	}
 private:
 	void Transit()
 	{
-		const Vec2 pos = GetPos() + (vel * time);
+		const Vec2 pos = GetPos() + vel;
 		SetPos( pos );
 	}
 
 private:
 	float radius;
 	Vec2 vel = {0, 0};
-	float time = 0.0f;
 };

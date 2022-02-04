@@ -28,6 +28,7 @@
 #include "MouseCameraControl.h"
 #include "FrameTimer.h"
 #include "PlankEntity.h"
+#include "BallEntity.h"
 #include <vector>
 
 class Game
@@ -54,4 +55,5 @@ private:
 	MouseCameraControl camControl;
 	FrameTimer ft;
 	PlankEntity plank;
+	BallEntity ball;
 };
