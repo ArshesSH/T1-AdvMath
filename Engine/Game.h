@@ -51,7 +51,6 @@ private:
 	/********************************/
 	CoordinateTransformer ct;
 	Camera cam;
-	StarField field;
 	MouseCameraControl camControl;
 	FrameTimer ft;
 };

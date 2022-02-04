@@ -30,7 +30,6 @@ Game::Game( MainWindow& wnd )
 	cam(ct),
 	camControl(cam, wnd.mouse)
 {
-	field.MakeRandomField();
 }
 
 void Game::Go()
@@ -43,20 +42,8 @@ void Game::Go()
 
 void Game::UpdateModel()
 {
-	const float dt = ft.Mark();
-	camControl.Update();
-	field.Update( dt );
 }
 
 void Game::ComposeFrame()
 {
-	for ( const auto& e : field.GetField() )
-	{
-		// if Rect.Screen overlap with Rect.Star, then draw
-		// will need get screen Rect and star Rect, IsOverlap
-		if ( e->GetStarRect().IsOverlapping(cam.GetScreenRect()) )
-		{
-			cam.Draw( e->GetDrawble() );
-		}
-	}
 }
