@@ -50,10 +50,14 @@ private:
 	/********************************/
 	/*  User Variables              */
 	/********************************/
+	static constexpr float removeCoord = 1000.0f;
+	static constexpr float period = 1.5f;
 	CoordinateTransformer ct;
 	Camera cam;
 	MouseCameraControl camControl;
 	FrameTimer ft;
 	PlankEntity plank;
 	BallShooter shooter;
+	std::vector<BallEntity> balls;
+	float time = 0.0f;
 };

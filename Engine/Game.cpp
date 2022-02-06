@@ -46,8 +46,6 @@ void Game::UpdateModel()
 {
 	const float dt = ft.Mark();
 
-	shooter.Update( dt );
-
 	if ( wnd.kbd.KeyIsPressed( VK_UP ) )
 	{
 		plank.MoveFreeYBy( 3 );
@@ -58,12 +56,36 @@ void Game::UpdateModel()
 	}
 
 	camControl.Update();
+	
+	// Generate balls
+	time += dt;
+	if ( time >= period )
+	{
+		time -= period;
+		balls.push_back(shooter.GenerateBall());
+	}
+
+	// Update balls
+	for ( auto it = balls.begin(); it != balls.end(); )
+	{
+		it->Update();
+
+		const Vec2 pos = it->GetPos();
+		if ( pos.x > removeCoord || pos.x < -removeCoord || pos.y > removeCoord || pos.y < -removeCoord )
+		{
+			it = balls.erase( it );
+		}
+		else
+		{
+			++it;
+		}
+	}
 }
 
 void Game::ComposeFrame()
 {
 	cam.Draw( plank.GetDrawble() );
-	for ( auto& b : shooter.GetBalls() )
+	for ( auto& b : balls )
 	{
 		cam.Draw( b.GetDrawble() );
 	}

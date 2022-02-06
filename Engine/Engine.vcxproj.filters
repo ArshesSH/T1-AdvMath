@@ -99,6 +99,9 @@
     <ClInclude Include="BallShooter.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ChilliMath.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DXErr.cpp">
