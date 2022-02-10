@@ -29,10 +29,9 @@ Game::Game( MainWindow& wnd )
 	gfx( wnd ),
 	ct(gfx),
 	cam(ct),
-	camControl(cam, wnd.mouse),
-	plank( { 0,0 }, -380.0f, -300.0f, 300.0f, 20.0f, Colors::Yellow ),
-	shooter( { 0, -300.0f } )
+	camControl(cam, wnd.mouse)
 {
+	field.MakeRandomField();
 }
 
 void Game::Go()
@@ -46,62 +45,15 @@ void Game::Go()
 void Game::UpdateModel()
 {
 	const float dt = ft.Mark();
-
-	if ( wnd.kbd.KeyIsPressed( VK_UP ) )
-	{
-		plank.MoveFreeYBy( 3 );
-	}
-	else if ( wnd.kbd.KeyIsPressed( VK_DOWN ) )
-	{
-		plank.MoveFreeYBy( -3 );
-	}
+	field.Update( dt );
 
 	camControl.Update();
-	
-	// Generate balls
-	time += dt;
-	if ( time >= period )
-	{
-		time -= period;
-		balls.push_back(shooter.GenerateBall());
-	}
-
-	// Update balls
-	for ( auto it = balls.begin(); it != balls.end(); )
-	{
-		it->Update();
-
-		const Vec2 originPos = plank.GetPoint().first;
-		const Vec2 freePos = plank.GetPoint().second;
-
-		const float dist = DistancePointLine( originPos, freePos, it->GetPos() );
-		if ( dist < it->GetRadius() && !it->GetCollide() )
-		{
-			const Vec2 vel = it->GetVel();
-			const Vec2 lineDirect = (originPos - freePos).GetNormalized();
-			const Vec2 changedVel = lineDirect* (vel * lineDirect) * 2.0f - vel;
-			it->SetVel( changedVel );
-			it->SetCollide();
-		}
-
-		// Remove balls
-		const Vec2 pos = it->GetPos();
-		if ( pos.x > removeCoord || pos.x < -removeCoord || pos.y > removeCoord || pos.y < -removeCoord )
-		{
-			it = balls.erase( it );
-		}
-		else
-		{
-			++it;
-		}
-	}
 }
 
 void Game::ComposeFrame()
 {
-	cam.Draw( plank.GetDrawble() );
-	for ( auto& b : balls )
+	for ( auto& e : field.GetField() )
 	{
-		cam.Draw( b.GetDrawble() );
+		cam.Draw( e->GetDrawble() );
 	}
 }
