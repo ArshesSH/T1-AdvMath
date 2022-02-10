@@ -143,7 +143,7 @@
     <ClInclude Include="Camera.h" />
     <ClInclude Include="ChiliException.h" />
     <ClInclude Include="ChiliWin.h" />
-    <ClInclude Include="ChilliMath.h" />
+    <ClInclude Include="ChiliMath.h" />
     <ClInclude Include="Colors.h" />
     <ClInclude Include="COMInitializer.h" />
     <ClInclude Include="CoordinateTransformer.h" />

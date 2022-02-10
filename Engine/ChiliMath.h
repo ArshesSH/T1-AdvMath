@@ -13,8 +13,8 @@ template<typename T>
 T DistancePointLine( const _Vec2<T>& p0, const _Vec2<T>& p1, const _Vec2<T>& q )
 {
 	const T a = p1.y - p0.y;
-	const T b = p1.x - p0.x;
-	const T c = p1.y - p0.y + p0.y * (p1.x - p0.x);
+	const T b = p0.x - p1.x;
+	const T c = p0.x * p1.y - p1.x * p0.y;
 
-	return std::abs( a * q.x + b * q.y + c ) / std::sqrt( sq( a ) * sq( b ) );
+	return std::abs( a * q.x + b * q.y + c ) / std::sqrt( sq( a ) + sq( b ) );
 }

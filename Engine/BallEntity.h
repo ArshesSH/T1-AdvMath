@@ -25,6 +25,14 @@ public:
 	{
 		vel = vel_in;
 	}
+	bool GetCollide() const
+	{
+		return isCollide;
+	}
+	void SetCollide(bool col = true)
+	{
+		isCollide = col;
+	}
 	void Update(  )
 	{
 		Transit();
@@ -39,4 +47,5 @@ private:
 private:
 	float radius;
 	Vec2 vel = {0, 0};
+	bool isCollide = false;
 };

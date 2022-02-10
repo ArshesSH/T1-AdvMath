@@ -20,6 +20,15 @@ public:
 	{
 		return freeMovePos + GetPos();
 	}
+	Vec2 GetSurfaceVec() const
+	{
+		return -freeMovePos;
+	}
+	auto GetPoint()
+	{
+		const Vec2 pos = GetPos();
+		return std::make_pair( pos, pos + freeMovePos );
+	}
 	float GetFreeY() const
 	{
 		return freeMovePos.y;
@@ -48,5 +57,4 @@ private:
 	float maxFreeYModel;
 	Vec2 freeMovePos;
 	float thickness;
-
 };

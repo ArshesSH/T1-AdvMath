@@ -21,6 +21,7 @@
 #include "MainWindow.h"
 #include "Game.h"
 #include "RectF.h"
+#include "ChiliMath.h"
 
 Game::Game( MainWindow& wnd )
 	:
@@ -70,6 +71,20 @@ void Game::UpdateModel()
 	{
 		it->Update();
 
+		const Vec2 originPos = plank.GetPoint().first;
+		const Vec2 freePos = plank.GetPoint().second;
+
+		const float dist = DistancePointLine( originPos, freePos, it->GetPos() );
+		if ( dist < it->GetRadius() && !it->GetCollide() )
+		{
+			const Vec2 vel = it->GetVel();
+			const Vec2 lineDirect = (originPos - freePos).GetNormalized();
+			const Vec2 changedVel = lineDirect* (vel * lineDirect) * 2.0f - vel;
+			it->SetVel( changedVel );
+			it->SetCollide();
+		}
+
+		// Remove balls
 		const Vec2 pos = it->GetPos();
 		if ( pos.x > removeCoord || pos.x < -removeCoord || pos.y > removeCoord || pos.y < -removeCoord )
 		{
