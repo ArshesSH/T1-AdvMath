@@ -8,14 +8,15 @@
 class StarEntity : public Entity
 {
 public:
-	StarEntity(float outerRadius, float innerRatio, int nFlares, const Vec2& pos, Color c, float colorFreq, float colorPhase, float radiusFreq )
+	StarEntity(float outerRadius, float innerRatio, int nFlares, const Vec2& pos, Color c, float colorFreq, float colorPhase, float radiusFreq, float spinFreq )
 		:
 		Entity(Star::Make(outerRadius, outerRadius * innerRatio, nFlares), pos, c),
 		radius(outerRadius),
 		baseColor(c),
 		colorFreq(colorFreq),
 		colorPhase(colorPhase),
-		radiusFreq(radiusFreq)
+		radiusFreq(radiusFreq),
+		spinFreq(spinFreq)
 	{}
 	float GetRadius() const
 	{
@@ -30,6 +31,7 @@ public:
 		time += dt;
 		Pulse();
 		SizeTransit();
+		Spin();
 	}
 private:
 	void Pulse()
@@ -46,6 +48,10 @@ private:
 		const float offset = (sin( radiusFreq * time * 3.141592f  ) + 1.0f) / 3.0f;
 		SetScale( 1.0 - offset );
 	}
+	void Spin()
+	{
+		SetAngle( spinFreq * time );
+	}
 private:
 	float radius;
 	float time = 0.0f;
@@ -54,4 +60,5 @@ private:
 	float colorPhase;
 	float radiusFreq;
 	float radiusPhase;
+	float spinFreq;
 };

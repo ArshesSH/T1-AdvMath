@@ -22,13 +22,21 @@ public:
 	{
 		pos = pos_in;
 	}
-	const float GetScale() const
+	float GetScale() const
 	{
 		return scale;
 	}
 	void SetScale( float scale_in )
 	{
 		scale = scale_in;
+	}
+	float GetAngle() const
+	{
+		return angle;
+	}
+	void SetAngle( float angle_in )
+	{
+		angle = angle_in;
 	}
 	void SetColor( Color c_in )
 	{
@@ -41,6 +49,7 @@ public:
 	Drawble GetDrawble() const
 	{
 		Drawble d( model, c );
+		d.Rotate( angle );
 		d.Scale( scale );
 		d.Translate( pos );
 		return d;
@@ -55,4 +64,5 @@ private:
 	Vec2 pos = {0.0f, 0.0f};
 	Color c;
 	float scale = 1.0f;
+	float angle = 0.0f;
 };

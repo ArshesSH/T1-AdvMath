@@ -66,7 +66,7 @@ public:
 	{
 		const T sinT = sin( angle );
 		const T cosT = cos( angle );
-		const new_x = x * cosT - y * sinT;
+		const T new_x = x * cosT - y * sinT;
 		y = x * sinT + y * cosT;
 		x = new_x;
 

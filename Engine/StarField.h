@@ -1,6 +1,7 @@
 #pragma once
 
 #include "StarEntity.h"
+#include "ChiliMath.h"
 #include <memory>
 #include <vector>
 #include <random>
@@ -21,8 +22,9 @@ public:
 		const Color colors[] = { Colors::Blue, Colors::White, Colors::Cyan, Colors::Red, Colors::Yellow };
 		std::uniform_int_distribution<size_t> colorSampler( 0, std::end( colors ) - std::begin( colors ) );
 		std::normal_distribution<float> colorFreqDist( colorFreqMean, colorFreqDev );
-		std::uniform_real_distribution<float> pulsePhaseDist( 0.0f, 2.0f * 3.141592f );
+		std::uniform_real_distribution<float> pulsePhaseDist( 0.0f, 2.0f * PI );
 		std::normal_distribution<float> radiusFreqDist( radiusFreqMean, radiusFreqDev );
+		std::uniform_real_distribution<float> spinFreqDist( spinFreqMin, spinFreqMax );
 
 		while ( field.size() < nStars )
 		{
@@ -43,8 +45,9 @@ public:
 			const float colorFreq = std::clamp( colorFreqDist( rng ), colorFreqMin, colorFreqMax );
 			const float colorPhase = pulsePhaseDist( rng );
 			const float radiusFreq = radiusFreqDist( rng );
+			const float spinFreq = spinFreqDist( rng );
 
-			field.emplace_back( std::make_unique<StarEntity>( rad, ratio, nFlares, pos, c, colorFreq, colorPhase, radiusFreq ) );
+			field.emplace_back( std::make_unique<StarEntity>( rad, ratio, nFlares, pos, c, colorFreq, colorPhase, radiusFreq, spinFreq ) );
 		}
 	}
 
@@ -85,6 +88,8 @@ private:
 	static constexpr float radiusFreqDev = 0.3f;
 	static constexpr float radiusFreqMin = 0.1f;
 	static constexpr float radiusFreqMax = 0.9f;
+	static constexpr float spinFreqMin = -1.0f * PI;
+	static constexpr float spinFreqMax = 1.0f * PI;
 
 	std::vector<std::unique_ptr<StarEntity>> field;
 };
