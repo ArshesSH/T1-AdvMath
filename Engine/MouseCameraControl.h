@@ -56,7 +56,7 @@ public:
 			if ( rightEngaged )
 			{
 				const auto curPos = (Vec2)mouse.GetPos();
-				const float delta = ((curPos - lastPos) / cam.GetScale()).x * rotateFactor;
+				const float delta = (curPos - lastPos).x * rotateFactor;
 				cam.RotateBy( -delta );
 				lastPos = curPos;
 			}
@@ -64,7 +64,7 @@ public:
 	}
 private:
 	static constexpr float zoomFactor = 1.05f;
-	static constexpr float rotateFactor = 0.001f * PI;
+	static constexpr float rotateFactor = 0.005f * PI;
 	Camera& cam;
 	Mouse& mouse;
 	Vec2 lastPos;
