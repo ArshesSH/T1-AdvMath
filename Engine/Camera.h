@@ -4,6 +4,7 @@
 #include "Drawble.h"
 #include "Graphics.h"
 #include "RectF.h"
+#include "ChiliMath.h"
 
 class Camera
 {
@@ -61,9 +62,13 @@ public:
 	}
 	const RectF& GetScreenRect()
 	{
-		const float halfWidth = float( Graphics::ScreenWidth / 2 );
-		const float halfHeight = float( Graphics::ScreenHeight / 2 );
-		return RectF::FromCenter( pos, halfWidth / scale, halfHeight / scale );
+		const float zoom = 1.0f / scale;
+
+		const float digonal = sqrt(
+			sq( float( Graphics::ScreenWidth / 2 ) * zoom ) +
+			sq( float( Graphics::ScreenHeight / 2 ) * zoom )
+		);
+		return RectF::FromCenter( pos, digonal, digonal );
 	}
 
 private:
