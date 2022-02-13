@@ -52,8 +52,12 @@ void Game::UpdateModel()
 
 void Game::ComposeFrame()
 {
-	for ( auto& e : field.GetField() )
+	const RectF viewport = cam.GetScreenRect();
+	for ( auto& star : field.GetField() )
 	{
-		cam.Draw( e->GetDrawble() );
+		if ( star->GetStarRect().IsOverlapping( viewport ) )
+		{
+			cam.Draw( star->GetDrawble() );
+		}
 	}
 }

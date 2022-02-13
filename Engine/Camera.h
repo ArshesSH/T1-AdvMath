@@ -8,11 +8,12 @@
 class Camera
 {
 public:
-	Camera( CoordinateTransformer& ct, const Vec2& pos = {0.0f, 0.0f}, float scale = 1.0f)
+	Camera( CoordinateTransformer& ct, const Vec2& pos = {0.0f, 0.0f}, float scale = 1.0f, float angle = 0.0f)
 		:
 		ct(ct),
 		pos(pos),
-		scale( scale )
+		scale( scale ),
+		angle( angle )
 	{}
 
 	const Vec2& GetPos() const
@@ -23,6 +24,14 @@ public:
 	{
 		pos = pos_in;
 	}
+	float GetAngle() const
+	{
+		return angle;
+	}
+	void SetAngle( float angle_in )
+	{
+		angle = angle_in;
+	}
 	float GetScale() const
 	{
 		return scale;
@@ -30,6 +39,10 @@ public:
 	void SetScale( float scale_in )
 	{
 		scale = scale_in;
+	}
+	void RotateBy( float angle_in )
+	{
+		angle += angle_in;
 	}
 	void MoveBy( const Vec2& offset )
 	{
@@ -43,6 +56,7 @@ public:
 	{
 		drawble.Translate( -pos );
 		drawble.Scale( scale );
+		drawble.Rotate( angle );
 		ct.Draw( std::move(drawble) );
 	}
 	const RectF& GetScreenRect()
@@ -56,4 +70,5 @@ private:
 	CoordinateTransformer& ct;
 	Vec2 pos = { 0.0f, 0.0f };
 	float scale = 1.0f;
+	float angle = 0.0f;
 };
