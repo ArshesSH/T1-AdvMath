@@ -46,6 +46,14 @@ public:
 			(T)0,	(T)0,	(T)1
 		};
 	}
+	static _Mat3 ScaleIndependent( T x, T y )
+	{
+		return {
+			x,	(T)0,	(T)0,
+			(T)0,	y,	(T)0,
+			(T)0,	(T)0,	(T)1
+		};
+	}
 	static _Mat3 Identity()
 	{
 		return Scale( (T)1 );
@@ -56,7 +64,7 @@ public:
 			(T)1,	(T)0,	(T)0,
 			(T)0,	(T)-1,	(T)0,
 			(T)0,	(T)0,	(T)1
-		}
+		};
 	}
 	static _Mat3 Rotation( T theta )
 	{
@@ -66,7 +74,7 @@ public:
 			cosT,	-sinT,	(T)0,
 			sinT,	cosT,	(T)0,
 			(T)0,	(T)0,	(T)1
-		}
+		};
 	}
 	static _Mat3 Translation( T x, T y )
 	{
@@ -74,7 +82,15 @@ public:
 			(T)1,	(T)0,	(T)x,
 			(T)0,	(T)1,	(T)y,
 			(T)0,	(T)0,	(T)1
-		}
+		};
+	}
+	static _Mat3 Translation( const Vec2& v )
+	{
+		return{
+			(T)1,	(T)0,	(T)v.x,
+			(T)0,	(T)1,	(T)v.y,
+			(T)0,	(T)0,	(T)1
+		};
 	}
 public:
 	// [row][col]

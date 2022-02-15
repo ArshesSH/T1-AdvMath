@@ -5,6 +5,7 @@
 #include "Graphics.h"
 #include "RectF.h"
 #include "ChiliMath.h"
+#include "Mat3.h"
 
 class Camera
 {
@@ -55,9 +56,7 @@ public:
 	}
 	void Draw( Drawble& drawble )
 	{
-		drawble.Translate( -pos );
-		drawble.Scale( scale );
-		drawble.Rotate( angle );
+		drawble.ApplyTransformation( Mat3::Rotation( angle ) * Mat3::Scale( scale ) * Mat3::Translation( -pos ) );
 		ct.Draw( std::move(drawble) );
 	}
 	const RectF& GetScreenRect()

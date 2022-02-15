@@ -4,6 +4,7 @@
 #include "Vec2.h"
 #include "Drawble.h"
 #include "Colors.h"
+#include "Mat3.h"
 
 class Entity
 {
@@ -49,9 +50,7 @@ public:
 	Drawble GetDrawble() const
 	{
 		Drawble d( model, c );
-		d.Rotate( angle );
-		d.Scale( scale );
-		d.Translate( pos );
+		d.ApplyTransformation( Mat3::Translation( pos ) * Mat3::Scale( scale ) * Mat3::Rotation( angle ) );
 		return d;
 	}
 protected:
