@@ -22,6 +22,7 @@
 #include "Game.h"
 #include "RectF.h"
 #include "ChiliMath.h"
+#include "Mat3.h"
 
 Game::Game( MainWindow& wnd )
 	:

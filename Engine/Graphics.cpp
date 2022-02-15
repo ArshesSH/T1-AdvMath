@@ -378,29 +378,13 @@ void Graphics::DrawClosedPolyline( const std::vector<Vec2>& vertices, Color c )
 	DrawLine( vertices.back(), vertices.front(), c);
 }
 
-void Graphics::DrawClosedPolyline( const std::vector<Vec2>& vertices, const Vec2& translation, float scale_x, float scale_y, float angle, Color c )
+void Graphics::DrawClosedPolyline( const std::vector<Vec2>& vertices, const Mat3& transformation, Color c )
 {
-	const float sinT = sin( angle );
-	const float cosT = cos( angle );
-
-	const auto transform = [&]( Vec2 v )
-	{
-		// Rotation
-		const float new_x = v.x * cosT - v.y * sinT;
-		v.y = v.x * sinT + v.y * cosT;
-		v.x = new_x;
-
-		v.x *= scale_x;
-		v.y *= scale_y;
-		v += translation;
-		return v;
-	};
-
-	const Vec2 front = transform( vertices.front() );
+	const Vec2 front = transformation * vertices.front();
 	Vec2 cur = front;
 	for ( auto i = vertices.begin(); i != std::prev( vertices.end() ); i++ )
 	{
-		const Vec2 next = transform( *std::next( i ) );
+		const Vec2 next = transformation *  *std::next( i );
 		DrawLine( cur, next, c );
 		cur = next;
 	}

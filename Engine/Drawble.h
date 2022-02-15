@@ -3,6 +3,7 @@
 #include "Graphics.h"
 #include <vector>
 #include "Vec2.h"
+#include "Mat3.h"
 #include "Colors.h"
 
 class Drawble
@@ -17,6 +18,7 @@ public:
 	void Translate( const Vec2& translation_in)
 	{
 		translation += translation_in;
+		transform.Translation( translation_in.x, translation_in.y );
 	}
 	void Scale( float scale_in )
 	{
@@ -43,8 +45,5 @@ public:
 private:
 	const std::vector<Vec2>* model;
 	Color c;
-	Vec2 translation = {0.0f, 0.0f};
-	float scale_x = 1.0f;
-	float scale_y = 1.0f;
-	float angle = 0.0f;
+	Mat3 transform = Mat3::Identity();
 };

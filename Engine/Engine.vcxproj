@@ -155,7 +155,7 @@
     <ClInclude Include="Graphics.h" />
     <ClInclude Include="Keyboard.h" />
     <ClInclude Include="MainWindow.h" />
-    <ClInclude Include="Mat2.h" />
+    <ClInclude Include="Mat3.h" />
     <ClInclude Include="Mouse.h" />
     <ClInclude Include="MouseCameraControl.h" />
     <ClInclude Include="PlankEntity.h" />
@@ -167,6 +167,7 @@
     <ClInclude Include="StarEntity.h" />
     <ClInclude Include="StarField.h" />
     <ClInclude Include="Vec2.h" />
+    <ClInclude Include="Vec3.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="COMInitializer.cpp" />
